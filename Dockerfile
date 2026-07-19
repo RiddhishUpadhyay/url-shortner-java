@@ -6,7 +6,6 @@ RUN mvn dependency:go-offline
 COPY backend ./backend
 COPY frontend ./frontend
 COPY db ./db
-COPY application.properties .
 RUN mvn clean package -DskipTests
 
 # Stage 2: Clean runtime stage
