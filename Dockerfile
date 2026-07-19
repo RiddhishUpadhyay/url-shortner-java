@@ -1,5 +1,6 @@
 # Stage 1: Build stage using Maven and JDK 17
 FROM maven:3.9.6-eclipse-temurin-17 AS build
+ENV MAVEN_OPTS="-Xmx384m -XX:+UseSerialGC"
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
