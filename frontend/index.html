@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnipLink - URL Shortening & Analytics Service</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header>
+        <div class="container nav-container">
+            <a href="/" class="logo">
+                <span class="logo-icon"></span>
+                SnipLink
+            </a>
+            <div class="user-status" id="user-nav-area">
+                <button class="btn btn-secondary" onclick="openAuthModal('login')">Log In</button>
+                <button class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Shorten Links. Track Reach.</h1>
+            <p class="hero-subtitle">Convert long, clumsy URLs into beautiful, unique links. Track analytics like clicks, browsers, devices, and location in real-time.</p>
+        </section>
+
+        <!-- Unauthenticated Callout -->
+        <div id="unauth-callout" class="glass-panel shorten-box" style="text-align: center; padding: 40px 20px;">
+            <h2 style="margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Unlock Link Shortening & Analytics</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">Please log in or create an account to start creating shortened links and tracking click analytics.</p>
+            <button class="btn btn-primary btn-lg" onclick="openAuthModal('login')">Get Started Now</button>
+        </div>
+
+        <!-- Shortening Form (Protected View) -->
+        <section id="shorten-section" class="glass-panel shorten-box" style="display: none;">
+            <form id="shorten-form" onsubmit="handleShorten(event)">
+                <div class="form-group-row">
+                    <input type="url" id="originalUrl" class="input-field" placeholder="Paste your long URL here (e.g., https://example.com/very/long/path)" required>
+                    <button type="submit" class="btn btn-primary">Shorten URL</button>
+                </div>
+                
+                <!-- Advanced options toggle -->
+                <div class="advanced-options-trigger" onclick="toggleAdvancedOptions()">
+                    <span>⚙️</span> Advanced Options (Custom Alias, Expiration)
+                </div>
+
+                <!-- Hidden Advanced Options -->
+                <div class="advanced-options" id="advanced-options-panel">
+                    <div class="adv-group">
+                        <label class="adv-label" for="customAlias">Custom Alias (Optional)</label>
+                        <input type="text" id="customAlias" class="input-field" placeholder="my-custom-link">
+                    </div>
+                    <div class="adv-group">
+                        <label class="adv-label" for="expiresInDays">Expiration (Days, Optional)</label>
+                        <input type="number" id="expiresInDays" class="input-field" placeholder="30" min="1">
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Links List Section (Protected View) -->
+        <section id="links-section" class="urls-list-section" style="display: none;">
+            <div class="section-header">
+                <h2>My Active Links</h2>
+                <button class="btn btn-secondary" onclick="fetchMyUrls()">🔄 Refresh</button>
+            </div>
+            
+            <div id="links-container">
+                <!-- Links will load here dynamically -->
+                <div class="empty-state">
+                    <div class="empty-state-icon">🔗</div>
+                    <p>No shortened links yet. Shorten your first link above!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SnipLink. Made with Java, Javalin, PostgreSQL & Redis.</p>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="glass-panel modal-content">
+            <div class="modal-tabs">
+                <div class="modal-tab active" id="tab-login" onclick="switchAuthTab('login')">Log In</div>
+                <div class="modal-tab" id="tab-register" onclick="switchAuthTab('register')">Sign Up</div>
+            </div>
+            
+            <h3 class="modal-title" id="auth-title">Log In to SnipLink</h3>
+            
+            <form class="modal-form" id="auth-form" onsubmit="handleAuthSubmit(event)">
+                <input type="text" id="auth-username" class="input-field" placeholder="Username" required autocomplete="username">
+                <input type="password" id="auth-password" class="input-field" placeholder="Password" required autocomplete="current-password">
+                <button type="submit" class="btn btn-primary" id="auth-submit-btn" style="width: 100%; padding: 14px;">Log In</button>
+                <button type="button" class="btn btn-secondary" onclick="closeAuthModal()" style="width: 100%; padding: 14px;">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <span id="toast-icon"></span>
+        <span id="toast-message">Notification message</span>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
