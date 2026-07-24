@@ -11,7 +11,7 @@
 
 ## 📌 Overview
 
-**SnipLink** is a production-ready, full-stack URL shortening service built in **Java** with an ultra-fast startup time (<300ms). It features real-time click tracking, rate limiting, and an interactive glassmorphic dashboard powered by **Chart.js**.
+**SnipLink** is a full-stack URL shortening service built in **Java** with an ultra-fast startup time (<300ms). It features real-time click tracking, rate limiting, and an interactive frontend.
 
 ---
 
